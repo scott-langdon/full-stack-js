@@ -1,0 +1,94 @@
+MongoDB Queries
+
+To create a new DB: 
+> use MongoBasics
+
+> show dbs 
+
+> db.post.insert({title: “hooray!”})
+
+> db.post.find() 
+
+> ls()
+
+> load(‘./seed.js’)
+
+> db.user.count()
+
+> db.users.find()
+
+> db.users.find()[2]
+
+> db.posts.find().limit(2)
+
+> var post = db.posts.find()[1]; 
+
+> post.title
+
+> post.description 
+
+> post.author 
+ObjectId(“123123123123123”); 
+
+> var id = post.author 
+
+> db.users.find(id); 
+
+> db.getCollectionNames() 
+
+> db.posts.createIndex({title:1})
+
+> db.posts.getIndexes()
+
+> db.posts.dropIndex('title_1')
+
+> db.posts.createIndex({_id_})
+doesn’t work, because _id_ is reserved 
+
+> db.posts.findOne()
+
+> db.posts.find({}, {body: false, description: false})
+
+> db.posts.find({},{title: true})
+
+> db.posts.find({},{title: true, _id: false})
+
+> db.posts.find({title: "Parenting 101"},{title: true, _id: false})
+
+> db.posts.find({title: "Parenting 101"},{})
+
+> db.posts.find({$or: [{title: "Parenting 101"},{title: "My Awesome Recipe!"}] }, {body: false, description: false})
+
+> db.users.find({}, {_id: true})
+
+> db.posts.find({author:ObjectId("5a9e40c29afa100d30d8c782")})
+
+> db.posts.update({author:ObjectId("5a9e40c29afa100d30d8c782")}, {$set: {tags:['foo','bar','interesting'], title: "I'm an Updated Title!"}})
+
+> db.posts.find({},{title:true}).limit(2)
+
+> Object.keys(db.posts.find()[0])
+this return the fields for the document:
+[
+  "_id",
+  "title",
+  "description",
+  "body",
+  "author"
+]
+
+> db.posts.find({},{title: true}).sort({title: 1})
+shows all the titles in ASC alphabetical order 
+
+> db.posts.find({},{title: true}).sort({title: 1})
+shows all the titles in DEC alphabetical order 
+
+PAGINATION
+> db.posts.find({},{title: true}).limit(2)
+shows the first 2 
+
+> db.posts.find({},{title: true}).limit(2).skip(2)
+skips the first 2 to show 3rd and 4th 
+
+> db.posts.find({},{title: true}).limit(2).skip(4)
+skips 1st-4th, but has nothing to show because its out of titles now 
