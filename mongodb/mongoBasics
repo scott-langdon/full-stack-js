@@ -92,3 +92,12 @@ skips the first 2 to show 3rd and 4th
 
 > db.posts.find({},{title: true}).limit(2).skip(4)
 skips 1st-4th, but has nothing to show because its out of titles now 
+
+
+CHEAT SHEET 
+show dbs — display the databases
+use bookworm — specify the database you're going to work with
+show collections — shows the document collections for the selected database
+db.users.find() — display all the documents in the users collection
+db.users.find().pretty() — nicer format for output documents within the shell
+db.users.drop() — remove the users collection from the current database
